@@ -1,0 +1,77 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="Dnn.Modules.RazorMvcHost" type="Module" version="01.00.00">
+      <friendlyName>Razor MVC Host</friendlyName>
+      <description>A DNN MVC Desktop Module that hosts arbitrary Razor (.cshtml) MVC view scripts. Drop scripts into Views/Scripts/ and pick which one to render per module instance.</description>
+      <owner>
+        <name>Bond For Web Solutions</name>
+        <organization>Bond For Web Solutions</organization>
+        <url>https://example.com</url>
+        <email>admin@example.com</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">08.00.00</dependency>
+      </dependencies>
+      <components>
+
+        <!-- Module definition -->
+        <component type="Module">
+          <desktopModule>
+            <moduleName>Dnn.Modules.RazorMvcHost</moduleName>
+            <foldername>Dnn.Modules.RazorMvcHost</foldername>
+            <businessControllerClass>Dnn.Modules.RazorMvcHost.Components.BusinessController, Dnn.Modules.RazorMvcHost</businessControllerClass>
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>Razor MVC Host</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>Dnn.Modules.RazorMvcHost.Controllers/Script/Index.mvc</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Razor MVC Host</controlTitle>
+                    <controlType>View</controlType>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>Dnn.Modules.RazorMvcHost.Controllers/Script/Edit.mvc</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Pick Script</controlTitle>
+                    <controlType>Edit</controlType>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+
+        <!-- Assembly -->
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>Dnn.Modules.RazorMvcHost.dll</name>
+              <path>bin</path>
+            </assembly>
+          </assemblies>
+        </component>
+
+        <!-- Resource files (views, css, js, localization) -->
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/MVC/Dnn.Modules.RazorMvcHost</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

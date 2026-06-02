@@ -1,0 +1,159 @@
+﻿@*
+    Edit screen - pick which .cshtml under /Views/Scripts/ to render for
+    this module instance. Selection is persisted in module settings.
+
+    NOTE: DNN MVC's `DnnHtmlHelper<T>` does NOT expose `Html.BeginForm`
+    or `Html.AntiForgeryToken`, so we emit a plain HTML form and rely on
+    DNN's own moduleId routing to deliver the POST to ScriptController.Edit.
+
+    Styles  : ~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/Resources/css/edit.css
+    Script  : ~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/Resources/js/edit.js
+    Strings : ~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/App_LocalResources/Edit.resx
+
+    The textarea is the source-of-truth that gets POSTed back. Monaco
+    Editor (the editor that powers VS Code) mounts on top of `#rmh-monaco`
+    and mirrors its value into the (hidden) textarea on every change and
+    on form submit. If Monaco fails to load (e.g. CDN blocked) the plain
+    textarea remains visible as a fallback.
+*@
+@functions{
+    static string L(string key) {
+        var v = DotNetNuke.Services.Localization.Localization.GetString(
+            key, "/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/App_LocalResources/Edit.resx");
+        return string.IsNullOrEmpty(v) ? key : v;
+    }
+}
+@{
+    Layout = null;
+    var available = ViewBag.AvailableScripts as System.Collections.Generic.List<string>
+                    ?? new System.Collections.Generic.List<string>();
+    var selected  = ViewBag.Selected as string ?? string.Empty;
+    var content   = ViewBag.ScriptContent as string ?? string.Empty;
+    var postUrl   = Url.Action("Edit", "Script");
+    var hasSelected = !string.IsNullOrEmpty(selected);
+
+    var resBase = "/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/Resources";
+}
+
+<link rel="stylesheet" href="@(resBase)/css/edit.css" />
+
+<div class="rmh-edit">
+
+    <div class="rmh-edit__header">
+        <div>
+            <h2 class="rmh-edit__title">@L("Title.Text")</h2>
+            <p class="rmh-edit__subtitle">@L("Subtitle.Text")</p>
+        </div>
+    </div>
+
+    <form method="post" action="@postUrl" class="rmh-edit__card" data-current-active="@selected">
+
+        <div class="rmh-edit__field">
+            <div class="rmh-edit__label-row">
+                <label for="scriptPath" class="rmh-edit__label">@L("ScriptFile.Label")</label>
+                <span class="rmh-edit__label-hint">@L("ScriptFileHint.Text") <code>@L("ScriptsFolderPath.Text")</code></span>
+            </div>
+
+            @if (available.Count == 0)
+            {
+                <div class="rmh-edit__empty">
+                    @L("Empty.Text")
+                    <code>@L("EmptyPath.Text")</code>.
+                    @L("EmptyHint.Text")
+                </div>
+                <input type="hidden" name="scriptPath" value="" />
+            }
+            else
+            {
+                <div class="rmh-edit__select-wrap">
+                    <select id="scriptPath" name="scriptPath" class="rmh-edit__select">
+                        <option value="">@L("NoneOption.Text")</option>
+                        @foreach (var path in available)
+                        {
+                            if (string.Equals(path, selected, System.StringComparison.OrdinalIgnoreCase))
+                            {
+                                <option value="@path" selected="selected">@path</option>
+                            }
+                            else
+                            {
+                                <option value="@path">@path</option>
+                            }
+                        }
+                    </select>
+                    <svg class="rmh-edit__chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+            }
+        </div>
+
+        <div class="rmh-edit__editor-wrap" style="@(hasSelected ? "" : "display:none")">
+            <label for="scriptContent" class="rmh-edit__label">@L("ScriptSource.Label")</label>
+            <div class="rmh-edit__editor-bar">
+                <code class="rmh-edit__editor-name">@selected</code>
+                <span class="rmh-edit__lines" data-lines="0">0 lines</span>
+                <button type="button" class="rmh-edit__btn-fs" title="@L("Fullscreen.Tooltip")" aria-label="@L("Fullscreen.Tooltip")">
+                    <svg class="rmh-edit__btn-fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 8 4 4 8 4"/><polyline points="16 4 20 4 20 8"/><polyline points="4 16 4 20 8 20"/><polyline points="20 16 20 20 16 20"/></svg>
+                    <svg class="rmh-edit__btn-fs-exit"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 4 8 8 4 8"/><polyline points="16 4 16 8 20 8"/><polyline points="4 16 8 16 8 20"/><polyline points="20 16 16 16 16 20"/></svg>
+                </button>
+            </div>
+
+            <div id="rmh-monaco" class="rmh-edit__monaco" data-language="razor"></div>
+            <textarea id="scriptContent" name="scriptContent" class="rmh-edit__textarea" spellcheck="false" wrap="off">@content</textarea>
+
+            <div class="rmh-edit__status">
+                <span class="rmh-edit__status__spacer"></span>
+                <span class="rmh-edit__status__item" data-role="position">Ln 1, Col 1</span>
+                <span class="rmh-edit__status__item" data-role="selection"></span>
+                <span class="rmh-edit__status__item" data-role="language">ASP.NET Razor</span>
+                <span class="rmh-edit__status__item" data-role="encoding">UTF-8</span>
+            </div>
+
+            <p class="rmh-edit__hint">@L("EditorHintPrefix.Text") <code>~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/Views/Scripts/<span class="rmh-edit__hint-path">@selected</span></code> @L("EditorHintSuffix.Text")</p>
+
+            <div class="rmh-edit__active-row">
+                <label class="rmh-edit__active-toggle">
+                    <input type="checkbox" id="setActive" name="setActive" value="1" @(hasSelected ? "checked=\"checked\"" : "") />
+                    @L("SetActivePrefix.Text") <strong>@L("ActiveWord.Text")</strong>
+                </label>
+                <span class="rmh-edit__active-sep">|</span>
+                <span>
+                    @L("CurrentlyActive.Text")
+                    @if (hasSelected)
+                    {
+                        <code class="rmh-edit__active-name">@selected</code>
+                    }
+                    else
+                    {
+                        <em>@L("None.Text")</em>
+                    }
+                </span>
+            </div>
+        </div>
+
+        <div class="rmh-edit__actions">
+            <button type="submit" name="submitAction" value="save" class="rmh-edit__btn-secondary" title="@L("Save.Tooltip")">
+                @L("Save.Text")
+            </button>
+            <button type="submit" name="submitAction" value="saveReturn" class="rmh-edit__btn-primary" title="@L("SaveReturn.Tooltip")">
+                @Html.Raw(L("SaveReturn.Text"))
+            </button>
+            <button type="submit" name="submitAction" value="return" class="rmh-edit__btn-ghost" title="@L("Return.Tooltip")" formnovalidate="formnovalidate">
+                @L("Return.Text")
+            </button>
+            <span class="rmh-edit__count">@available.Count @(available.Count == 1 ? L("ScriptAvailable.Text") : L("ScriptsAvailable.Text"))</span>
+        </div>
+
+    </form>
+</div>
+
+@{
+    var allContents = ViewBag.AllContents as System.Collections.Generic.IDictionary<string, string>
+                      ?? new System.Collections.Generic.Dictionary<string, string>();
+    var allJson = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(allContents);
+}
+<script>
+    window.__rmhEdit = {
+        contents: @Html.Raw(allJson),
+        monacoBase: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs'
+    };
+</script>
+<script src="@(resBase)/js/edit.js"></script>

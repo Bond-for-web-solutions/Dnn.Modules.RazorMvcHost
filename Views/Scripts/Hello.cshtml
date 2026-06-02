@@ -1,0 +1,22 @@
+@*
+    Sample hosted script. Edit me or drop your own .cshtml files into this
+    folder; they will appear in the module's Edit screen automatically.
+
+    The view is rendered as a regular MVC view, so you can use:
+      - @Model (none here)
+      - @ViewBag / @ViewData
+      - HtmlHelpers (@Html.Raw, @Html.Partial, ...)
+      - Any namespace declared in Views/Web.config
+*@
+@{
+    Layout = null;
+}
+
+<section style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px;">
+    <h2 style="margin-top: 0;">Hello from Razor MVC Host</h2>
+    <p>
+        This view lives at
+        <code>~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/Views/Scripts/Hello.cshtml</code>.
+    </p>
+    <p>Server time: <strong>@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</strong></p>
+</section>

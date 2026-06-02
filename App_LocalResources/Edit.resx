@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Title.Text" xml:space="preserve">
+    <value>Razor MVC Host</value>
+  </data>
+  <data name="Subtitle.Text" xml:space="preserve">
+    <value>Pick a Razor view to render in this module instance.</value>
+  </data>
+
+  <data name="ScriptFile.Label" xml:space="preserve">
+    <value>Script file</value>
+  </data>
+  <data name="ScriptFileHint.Text" xml:space="preserve">
+    <value>resolved relative to</value>
+  </data>
+  <data name="ScriptsFolderPath.Text" xml:space="preserve">
+    <value>Views/Scripts/</value>
+  </data>
+  <data name="NoneOption.Text" xml:space="preserve">
+    <value>- None (module shows placeholder) -</value>
+  </data>
+
+  <data name="Empty.Text" xml:space="preserve">
+    <value>No .cshtml files were found under</value>
+  </data>
+  <data name="EmptyPath.Text" xml:space="preserve">
+    <value>~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/Views/Scripts/</value>
+  </data>
+  <data name="EmptyHint.Text" xml:space="preserve">
+    <value>Drop one in and reload this page.</value>
+  </data>
+
+  <data name="ScriptSource.Label" xml:space="preserve">
+    <value>Script source</value>
+  </data>
+  <data name="Lines.Text" xml:space="preserve">
+    <value>lines</value>
+  </data>
+  <data name="Chars.Text" xml:space="preserve">
+    <value>chars</value>
+  </data>
+  <data name="EditorHintPrefix.Text" xml:space="preserve">
+    <value>Edits are saved to</value>
+  </data>
+  <data name="EditorHintSuffix.Text" xml:space="preserve">
+    <value>when you click Save.</value>
+  </data>
+
+  <data name="SetActivePrefix.Text" xml:space="preserve">
+    <value>Set as</value>
+  </data>
+  <data name="ActiveWord.Text" xml:space="preserve">
+    <value>active</value>
+  </data>
+  <data name="CurrentlyActive.Text" xml:space="preserve">
+    <value>Currently active:</value>
+  </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>none</value>
+  </data>
+
+  <data name="Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Save.Tooltip" xml:space="preserve">
+    <value>Save and keep editing</value>
+  </data>
+  <data name="SaveReturn.Text" xml:space="preserve">
+    <value>Save &amp; Return</value>
+  </data>
+  <data name="SaveReturn.Tooltip" xml:space="preserve">
+    <value>Save and close the edit screen</value>
+  </data>
+  <data name="Return.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Return.Tooltip" xml:space="preserve">
+    <value>Discard and go back without saving</value>
+  </data>
+
+  <data name="ScriptAvailable.Text" xml:space="preserve">
+    <value>script available</value>
+  </data>
+  <data name="ScriptsAvailable.Text" xml:space="preserve">
+    <value>scripts available</value>
+  </data>
+
+  <data name="Fullscreen.Text" xml:space="preserve">
+    <value>Fullscreen</value>
+  </data>
+  <data name="Fullscreen.Tooltip" xml:space="preserve">
+    <value>Expand the editor to fill the screen (Esc to exit)</value>
+  </data>
+  <data name="ExitFullscreen.Text" xml:space="preserve">
+    <value>Exit fullscreen</value>
+  </data>
+  <data name="ExitFullscreen.Tooltip" xml:space="preserve">
+    <value>Return the editor to its normal size</value>
+  </data>
+
+  <data name="Ln.Text" xml:space="preserve">
+    <value>Ln</value>
+  </data>
+  <data name="Col.Text" xml:space="preserve">
+    <value>Col</value>
+  </data>
+  <data name="Spaces.Text" xml:space="preserve">
+    <value>Spaces</value>
+  </data>
+  <data name="Tabs.Text" xml:space="preserve">
+    <value>Tab Size</value>
+  </data>
+  <data name="GoToLine.Tooltip" xml:space="preserve">
+    <value>Go to line/column (Ctrl+G)</value>
+  </data>
+  <data name="Indent.Tooltip" xml:space="preserve">
+    <value>Indentation</value>
+  </data>
+  <data name="Eol.Tooltip" xml:space="preserve">
+    <value>Line ending sequence</value>
+  </data>
+  <data name="Encoding.Tooltip" xml:space="preserve">
+    <value>File encoding</value>
+  </data>
+  <data name="Language.Tooltip" xml:space="preserve">
+    <value>Editor language mode</value>
+  </data>
+  <data name="Problems.Tooltip" xml:space="preserve">
+    <value>Errors and warnings reported by the editor</value>
+  </data>
+</root>

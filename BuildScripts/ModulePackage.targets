@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="windows-1252"?>
+
+<!-- WARNING, WARNING, WARNING -->
+<!-- REMEMBER THAT IF YOU MODIFY THE TARGETS FILE YOU NEED TO CLOSE/OPEN THE PROJECT FOR THE CHANGES TO TAKE EFFECT -->
+
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="PackageModule" AfterTargets="Build" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+    <!-- Read version from the .dnn manifest -->
+    <XmlRead Prefix="n"
+             Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
+             XPath="dotnetnuke/packages/package[1]/@version"
+             XmlFileName="$(DNNFileName).dnn">
+      <Output TaskParameter="Value" PropertyName="Version" />
+    </XmlRead>
+
+    <!-- Gather manifest and text files -->
+    <CreateItem Include="$(DNNFileName).dnn">
+      <Output TaskParameter="Include" ItemName="PackageManifestFiles" />
+    </CreateItem>
+
+    <CreateItem Include="License.txt">
+      <Output TaskParameter="Include" ItemName="PackageTxtFiles" />
+    </CreateItem>
+
+    <CreateItem Include="ReleaseNotes.txt">
+      <Output TaskParameter="Include" ItemName="PackageTxtFiles" />
+    </CreateItem>
+
+    <CreateItem Include="**\*.sqldataprovider">
+      <Output TaskParameter="Include" ItemName="SqlDataProviderFiles" />
+    </CreateItem>
+
+    <!-- ── Resources.zip (views, css, js, resx, SQL scripts) ── -->
+    <ItemGroup>
+      <InstallInclude Include="**\*.ascx" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="**\*.css" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="**\*.js" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="**\*.html" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="**\*.resx" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="**\*.cshtml" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="**\*.txt" Exclude="packages\**;obj\**;**\.git\**" />
+      <InstallInclude Include="**\images\**" Exclude="packages\**;obj\**" />
+      <InstallInclude Include="Views\Web.config" />
+    </ItemGroup>
+
+    <!-- Build Resources.zip -->
+    <Copy SourceFiles="@(InstallInclude)"
+          DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\%(RecursiveDir)" />
+
+    <CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
+      <Output TaskParameter="Include" ItemName="ResourcesContent" />
+    </CreateItem>
+
+    <Zip Files="@(ResourcesContent)"
+         WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip"
+         ZipFileName="Resources.$(Extension)" />
+
+    <!-- ── Assemble install package ── -->
+    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll"
+          DestinationFolder="$(MSBuildProjectDirectory)\Package\bin" />
+
+    <Copy SourceFiles="@(SqlDataProviderFiles)"
+          DestinationFolder="$(MSBuildProjectDirectory)\Package\%(RecursiveDir)"
+          Condition="'@(SqlDataProviderFiles)' != ''" />
+
+    <Copy SourceFiles="@(PackageManifestFiles)"
+          DestinationFolder="$(MSBuildProjectDirectory)\Package" />
+    <Copy SourceFiles="@(PackageTxtFiles)"
+          DestinationFolder="$(MSBuildProjectDirectory)\Package" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Resources.$(Extension)"
+          DestinationFolder="$(MSBuildProjectDirectory)\Package" />
+
+    <!-- Zip the install package -->
+    <CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
+      <Output TaskParameter="Include" ItemName="OutputContent" />
+    </CreateItem>
+
+    <Zip Files="@(OutputContent)"
+         WorkingDirectory="$(MSBuildProjectDirectory)\Package"
+         ZipFileName="$(PackageName)_$(Version)_Install.$(Extension)" />
+
+    <!-- Copy to install folder -->
+    <MakeDir Directories="$(MSBuildProjectDirectory)\install" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)"
+          DestinationFolder="$(MSBuildProjectDirectory)\install" />
+
+    <!-- Clean up -->
+    <Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" />
+    <Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
+
+    <Message Text="DNN Install package created: install\$(PackageName)_$(Version)_Install.$(Extension)" Importance="high" />
+
+  </Target>
+</Project>

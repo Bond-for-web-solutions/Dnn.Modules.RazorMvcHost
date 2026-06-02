@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="BuildScripts\BuildProperties.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>Dnn.Modules.RazorMvcHost</AssemblyName>
+    <RootNamespace>Dnn.Modules.RazorMvcHost</RootNamespace>
+    <NuGetAudit>false</NuGetAudit>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+
+    <!-- DNN Package properties used by ModulePackage.targets -->
+    <DNNFileName>manifest</DNNFileName>
+    <PackageName>Dnn.Modules.RazorMvcHost</PackageName>
+    <Extension>zip</Extension>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetNuke.Core" Version="9.11.0" />
+    <PackageReference Include="DotNetNuke.Web" Version="9.11.0" />
+    <PackageReference Include="DotNetNuke.Web.Mvc" Version="9.11.0" />
+    <!--
+        Microsoft.AspNet.Razor (System.Web.Razor.dll) ships INSIDE DNN's
+        own bin folder (DNN MVC modules require it at runtime). We need
+        it at COMPILE time only - hence ExcludeAssets="runtime" so the
+        DLL is NOT copied into our module's bin\ and packaged into the
+        installer. At runtime DNN's bin\System.Web.Razor.dll is loaded.
+    -->
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.9" ExcludeAssets="runtime" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <Import Project="BuildScripts\MSBuild.Community.Tasks.Targets" />
+  <Import Project="BuildScripts\ModulePackage.targets" />
+
+</Project>

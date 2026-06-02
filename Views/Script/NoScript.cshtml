@@ -1,0 +1,21 @@
+@*
+    Fallback view shown when no script is configured (or the configured one
+    is missing). The Edit screen lets a host pick from /Views/Scripts/.
+
+    Strings : ~/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/App_LocalResources/NoScript.resx
+*@
+@functions{
+    static string L(string key) {
+        var v = DotNetNuke.Services.Localization.Localization.GetString(
+            key, "/DesktopModules/MVC/Dnn.Modules.RazorMvcHost/App_LocalResources/NoScript.resx");
+        return string.IsNullOrEmpty(v) ? key : v;
+    }
+}
+@{
+    Layout = null;
+    var msg = ViewBag.Message as string ?? L("DefaultMessage.Text");
+}
+<div class="dnn-form-message dnn-form-info">
+    <p>@msg</p>
+    <p>@L("UseEdit.Text") <strong>@L("EditWord.Text")</strong> @L("UseEditSuffix.Text")</p>
+</div>

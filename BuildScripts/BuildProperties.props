@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <!-- DNN module build path. Override by setting DnnBinRoot in your environment or command line. -->
+    <DnnBinRoot Condition="'$(DnnBinRoot)' == ''">C:\DNN\dzp\bin\</DnnBinRoot>
+
+    <!-- Auto-detected from running MSBuild engine; usually MSBuild already sets it. -->
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">$([System.Version]::Parse($(MSBuildVersion)).Major).0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\</VSToolsPath>
+  </PropertyGroup>
+</Project>

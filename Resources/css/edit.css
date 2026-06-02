@@ -1,0 +1,327 @@
+/*
+    Razor MVC Host - Edit screen styles
+    (extracted from Views/Script/Edit.cshtml)
+*/
+
+.rmh-edit {
+    /* ---- design tokens (DRY) ---- */
+    --rmh-color-text:        #111827;
+    --rmh-color-text-soft:   #374151;
+    --rmh-color-text-muted:  #6b7280;
+    --rmh-color-text-invert: #e5e7eb;
+
+    --rmh-color-surface:     #ffffff;
+    --rmh-color-surface-2:   #f9fafb;
+    --rmh-color-surface-3:   #f3f4f6;
+    --rmh-color-surface-dark: #1f2937;
+    --rmh-color-surface-darker: #111827;
+
+    --rmh-color-border:      #e5e7eb;
+    --rmh-color-border-2:    #d1d5db;
+    --rmh-color-border-soft: #f3f4f6;
+
+    --rmh-color-primary:        #3b82f6;
+    --rmh-color-primary-strong: #6366f1;
+    --rmh-color-primary-ring:   rgba(59,130,246,0.25);
+    --rmh-color-primary-glow:   rgba(59,130,246,0.4);
+    --rmh-color-primary-soft:   #93c5fd;
+
+    --rmh-color-success-bg:     #ecfdf5;
+    --rmh-color-success-border: #a7f3d0;
+    --rmh-color-success-text:   #065f46;
+    --rmh-color-success-icon:   #059669;
+
+    --rmh-color-warn-bg:     #fffbeb;
+    --rmh-color-warn-border: #fde68a;
+    --rmh-color-warn-text:   #92400e;
+    --rmh-color-warn-icon:   #d97706;
+
+    --rmh-color-empty-bg:     #fef3c7;
+    --rmh-color-empty-border: #fcd34d;
+
+    --rmh-gradient-primary: linear-gradient(135deg, var(--rmh-color-primary), var(--rmh-color-primary-strong));
+
+    --rmh-radius-sm: 3px;
+    --rmh-radius-md: 8px;
+    --rmh-radius-lg: 10px;
+    --rmh-radius-xl: 12px;
+    --rmh-radius-pill: 999px;
+
+    --rmh-space-1: 4px;
+    --rmh-space-2: 6px;
+    --rmh-space-3: 8px;
+    --rmh-space-4: 10px;
+    --rmh-space-5: 12px;
+    --rmh-space-6: 16px;
+    --rmh-space-7: 18px;
+    --rmh-space-8: 20px;
+
+    --rmh-font-stack:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --rmh-font-mono:     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --rmh-font-xs: 12px;
+    --rmh-font-sm: 13px;
+    --rmh-font-md: 14px;
+    --rmh-font-lg: 18px;
+    --rmh-font-mono-size: 12.5px;
+
+    --rmh-icon-sm: 14px;
+    --rmh-icon-md: 16px;
+    --rmh-icon-lg: 22px;
+
+    --rmh-shadow-card:   0 1px 2px rgba(0,0,0,0.04);
+    --rmh-shadow-btn:    0 1px 2px var(--rmh-color-primary-glow);
+    --rmh-shadow-btn-hv: 0 4px 12px var(--rmh-color-primary-glow);
+    --rmh-transition:    border-color .15s, box-shadow .15s, background .15s;
+
+    /* ---- container ---- */
+    width: 100%; max-width: 1280px; margin: 0 auto;
+    padding: var(--rmh-space-6);
+    font-family: var(--rmh-font-stack); color: var(--rmh-color-text);
+}
+.rmh-edit * { box-sizing: border-box; }
+
+.rmh-edit__header { display: flex; align-items: center; gap: var(--rmh-space-5); margin-bottom: var(--rmh-space-7); }
+.rmh-edit__icon-wrap { width: 40px; height: 40px; flex: 0 0 40px; border-radius: var(--rmh-radius-lg); background: var(--rmh-gradient-primary); display: inline-flex; align-items: center; justify-content: center; }
+.rmh-edit__icon-wrap svg { width: var(--rmh-icon-lg); height: var(--rmh-icon-lg); stroke: #fff; }
+.rmh-edit__title { margin: 0; font-size: var(--rmh-font-lg); font-weight: 600; line-height: 1.2; }
+.rmh-edit__subtitle { margin: 2px 0 0 0; font-size: var(--rmh-font-sm); color: var(--rmh-color-text-muted); line-height: 1.3; }
+
+.rmh-edit__card { background: var(--rmh-color-surface); border: 1px solid var(--rmh-color-border); border-radius: var(--rmh-radius-xl); padding: var(--rmh-space-8); box-shadow: var(--rmh-shadow-card); }
+
+.rmh-edit__field { margin-bottom: var(--rmh-space-6); }
+.rmh-edit__label { display: block; font-size: var(--rmh-font-sm); font-weight: 600; color: var(--rmh-color-text-soft); margin-bottom: var(--rmh-space-2); }
+.rmh-edit__label-row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--rmh-space-3); flex-wrap: wrap; margin-bottom: var(--rmh-space-2); }
+.rmh-edit__label-row .rmh-edit__label { margin-bottom: 0; }
+.rmh-edit__label-hint { font-size: var(--rmh-font-xs); color: var(--rmh-color-text-muted); font-weight: 400; }
+.rmh-edit__label-hint code { background: var(--rmh-color-surface-2); padding: 1px var(--rmh-space-2); border-radius: var(--rmh-radius-sm); font-family: var(--rmh-font-mono); font-size: 0.85em; }
+.rmh-edit__hint  { font-size: var(--rmh-font-xs); color: var(--rmh-color-text-muted); margin: var(--rmh-space-1) 0 0 0; }
+
+.rmh-edit__select-wrap { position: relative; }
+.rmh-edit__select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    width: 100%; padding: var(--rmh-space-4) 36px var(--rmh-space-4) var(--rmh-space-5);
+    font: inherit; font-size: var(--rmh-font-md); color: var(--rmh-color-text);
+    background: var(--rmh-color-surface-2); border: 1px solid var(--rmh-color-border-2); border-radius: var(--rmh-radius-md);
+    cursor: pointer; outline: none;
+    transition: var(--rmh-transition);
+}
+.rmh-edit__select:hover { background: var(--rmh-color-surface-3); }
+.rmh-edit__select:focus-visible { border-color: var(--rmh-color-primary); box-shadow: 0 0 0 3px var(--rmh-color-primary-ring); background: var(--rmh-color-surface); }
+.rmh-edit__chev { position: absolute; right: var(--rmh-space-5); top: 50%; transform: translateY(-50%); pointer-events: none; width: var(--rmh-icon-md); height: var(--rmh-icon-md); stroke: var(--rmh-color-text-muted); }
+
+/* active-script toggle (compact, inline) */
+.rmh-edit__active-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--rmh-space-3); margin-top: var(--rmh-space-2); font-size: var(--rmh-font-xs); color: var(--rmh-color-text-muted); }
+.rmh-edit__active-toggle { display: inline-flex; align-items: center; gap: var(--rmh-space-2); cursor: pointer; user-select: none; color: var(--rmh-color-text-soft); }
+.rmh-edit__active-toggle input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--rmh-color-primary); cursor: pointer; margin: 0; }
+.rmh-edit__active-toggle strong { color: var(--rmh-color-text); }
+.rmh-edit__active-sep { color: var(--rmh-color-border-2); }
+.rmh-edit__active-name { background: rgba(59,130,246,0.10); color: var(--rmh-color-primary); padding: 0 var(--rmh-space-2); border-radius: var(--rmh-radius-sm); font-size: var(--rmh-font-xs); font-family: var(--rmh-font-mono); }
+
+.rmh-edit__empty { padding: var(--rmh-space-6); background: var(--rmh-color-empty-bg); border: 1px solid var(--rmh-color-empty-border); border-radius: var(--rmh-radius-md); color: var(--rmh-color-warn-text); font-size: var(--rmh-font-sm); line-height: 1.45; }
+.rmh-edit__empty code { background: rgba(120,53,15,0.10); padding: 1px 5px; border-radius: var(--rmh-radius-sm); font-size: var(--rmh-font-xs); }
+
+.rmh-edit__actions { display: flex; gap: var(--rmh-space-3); align-items: center; margin-top: var(--rmh-space-7); padding-top: var(--rmh-space-6); border-top: 1px solid var(--rmh-color-border-soft); }
+.rmh-edit__btn-primary {
+    appearance: none; border: 0; cursor: pointer;
+    padding: 9px 18px; font: inherit; font-size: var(--rmh-font-md); font-weight: 600;
+    color: #fff; background: var(--rmh-gradient-primary);
+    border-radius: var(--rmh-radius-md); box-shadow: var(--rmh-shadow-btn);
+    transition: transform .1s, box-shadow .15s, opacity .15s;
+    display: inline-flex; align-items: center; gap: var(--rmh-space-2);
+}
+.rmh-edit__btn-primary:hover  { box-shadow: var(--rmh-shadow-btn-hv); }
+.rmh-edit__btn-primary:active { transform: translateY(1px); }
+.rmh-edit__btn-primary svg    { width: var(--rmh-icon-sm); height: var(--rmh-icon-sm); stroke: #fff; }
+
+.rmh-edit__btn-secondary {
+    appearance: none; cursor: pointer;
+    padding: 9px 16px; font: inherit; font-size: var(--rmh-font-md); font-weight: 600;
+    color: var(--rmh-color-primary); background: var(--rmh-color-surface);
+    border: 1px solid var(--rmh-color-border-2);
+    border-radius: var(--rmh-radius-md);
+    transition: var(--rmh-transition);
+    display: inline-flex; align-items: center; gap: var(--rmh-space-2);
+}
+.rmh-edit__btn-secondary:hover  { border-color: var(--rmh-color-primary); background: var(--rmh-color-surface-2); }
+.rmh-edit__btn-secondary:active { transform: translateY(1px); }
+.rmh-edit__btn-secondary svg    { width: var(--rmh-icon-sm); height: var(--rmh-icon-sm); stroke: var(--rmh-color-primary); }
+
+.rmh-edit__btn-ghost {
+    appearance: none; cursor: pointer;
+    padding: 9px 16px; font: inherit; font-size: var(--rmh-font-md); font-weight: 500;
+    color: var(--rmh-color-text-soft); background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--rmh-radius-md);
+    transition: var(--rmh-transition);
+    display: inline-flex; align-items: center; gap: var(--rmh-space-2);
+}
+.rmh-edit__btn-ghost:hover  { color: var(--rmh-color-text); background: var(--rmh-color-surface-2); border-color: var(--rmh-color-border); }
+.rmh-edit__btn-ghost:active { transform: translateY(1px); }
+.rmh-edit__btn-ghost svg    { width: var(--rmh-icon-sm); height: var(--rmh-icon-sm); stroke: currentColor; }
+
+.rmh-edit__count { margin-left: auto; font-size: var(--rmh-font-xs); color: var(--rmh-color-text-muted); }
+
+.rmh-edit__editor-wrap { margin-top: var(--rmh-space-7); }
+/*
+    VS Code-style titlebar above the Monaco editor. Matches the 'vs'
+    light theme: light gray background (#f3f3f3), dark text, subtle
+    border that lines up with the editor below. Replaces the old dark
+    navy header which clashed with the light editor.
+*/
+.rmh-edit__editor-bar { display: flex; align-items: center; gap: var(--rmh-space-2); padding: 6px 10px; background: #f3f3f3; color: #333333; border: 1px solid #e0e0e0; border-bottom: 0; border-radius: var(--rmh-radius-md) var(--rmh-radius-md) 0 0; font-size: var(--rmh-font-xs); }
+.rmh-edit__editor-bar svg { width: var(--rmh-icon-sm); height: var(--rmh-icon-sm); stroke: #007acc; }
+.rmh-edit__editor-bar code { background: #ffffff; color: #333333; padding: 2px 6px; border: 1px solid #e0e0e0; border-radius: var(--rmh-radius-sm); font-size: var(--rmh-font-xs); }
+.rmh-edit__editor-bar .rmh-edit__lines { margin-left: auto; opacity: .7; }
+
+/*
+    Fullscreen toggle (icon-only, lives in the editor titlebar). Restyled
+    for the light VS Code-like bar - on the previous dark bar this button
+    had white text + white-tinted background and ended up invisible after
+    we lightened the header.
+*/
+.rmh-edit__btn-fs {
+    appearance: none; cursor: pointer;
+    margin-left: var(--rmh-space-3);
+    padding: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font: inherit; font-size: var(--rmh-font-xs); line-height: 1;
+    color: #555555;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--rmh-radius-sm);
+    transition: background .12s, border-color .12s, color .12s;
+}
+.rmh-edit__btn-fs:hover  { background: #e7e7e7; border-color: #d0d0d0; color: #000000; }
+.rmh-edit__btn-fs:focus  { outline: 1px solid #007acc; outline-offset: 1px; }
+.rmh-edit__btn-fs svg    { width: 16px; height: 16px; stroke: currentColor; display: block; }
+.rmh-edit__btn-fs .rmh-edit__btn-fs-exit { display: none; }
+
+/* fullscreen overlay - kicks in when JS adds the modifier class to .rmh-edit__editor-wrap */
+.rmh-edit__editor-wrap--fullscreen {
+    position: fixed;
+    inset: 0;
+    /* Use the maximum 32-bit signed int so we sit above DNN's persona bar,
+       control bar, edit toolbars and any third-party fixed-position chrome. */
+    z-index: 2147483000;
+    margin: 0;
+    padding: 0;
+    background: var(--rmh-color-surface-darker);
+    display: flex;
+    flex-direction: column;
+}
+/* While fullscreen is active, suppress DNN's own fixed chrome so it can't
+   poke through the overlay. We target the persona bar (Evoq/DNN 9), the
+   classic control bar, and the page-edit toolbar. */
+body.rmh-edit-fs-locked #personaBar,
+body.rmh-edit-fs-locked #personabar-iframe,
+body.rmh-edit-fs-locked .personaBar-Container,
+body.rmh-edit-fs-locked .personaBar,
+body.rmh-edit-fs-locked .personabar,
+body.rmh-edit-fs-locked .dnnEditState,
+body.rmh-edit-fs-locked .ControlBar_ButtonGroup,
+body.rmh-edit-fs-locked #ControlBar,
+body.rmh-edit-fs-locked .controlBar_OuterPanel,
+body.rmh-edit-fs-locked .controlBar_BackgroundPanel,
+body.rmh-edit-fs-locked #ControlPanel,
+body.rmh-edit-fs-locked #control-bar,
+body.rmh-edit-fs-locked #personabar-container,
+body.rmh-edit-fs-locked div.dnn_mact,
+body.rmh-edit-fs-locked .socialpanel,
+body.rmh-edit-fs-locked .dnn-persona-bar-pane { display: none !important; }
+.rmh-edit__editor-wrap--fullscreen > label { display: none; }
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__hint,
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__active-row { display: none; }
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__editor-bar { border-radius: 0; flex: 0 0 auto; }
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__monaco {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+    border-radius: 0;
+}
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__status { flex: 0 0 auto; border-radius: 0; }
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__btn-fs .rmh-edit__btn-fs-enter { display: none; }
+.rmh-edit__editor-wrap--fullscreen .rmh-edit__btn-fs .rmh-edit__btn-fs-exit  { display: inline; }
+/* prevent the page underneath from scrolling while fullscreen is active */
+body.rmh-edit-fs-locked { overflow: hidden; }
+
+/*
+    Hidden source-of-truth textarea. Monaco mirrors its value into this
+    field on every change and on form submit, so the form always posts
+    the live editor content.
+*/
+.rmh-edit__textarea {
+    display: none !important;
+}
+
+/* Monaco (VS Code) editor host. Border color matches the titlebar above
+   and the status bar below for a clean continuous frame. */
+.rmh-edit__monaco {
+    width: 100%;
+    height: 480px;
+    border: 1px solid #e0e0e0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background: #ffffff; /* matches the 'vs' (Visual Studio Light) theme while loading */
+}
+
+/* VS Code-style status bar (sits below the Monaco editor) */
+.rmh-edit__status {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    font-family: var(--rmh-font-stack);
+    font-size: 12px;
+    line-height: 1;
+    color: #ffffff;
+    background: #007acc;
+    border-radius: 0 0 var(--rmh-radius-md) var(--rmh-radius-md);
+    user-select: none;
+}
+.rmh-edit__status__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    cursor: default;
+    transition: background-color .12s;
+}
+.rmh-edit__status__item--clickable { cursor: pointer; }
+.rmh-edit__status__item--clickable:hover { background: rgba(255,255,255,0.18); }
+.rmh-edit__status__spacer { flex: 1 1 auto; }
+.rmh-edit__status__problems { display: inline-flex; align-items: center; gap: 10px; padding: 4px 10px; }
+.rmh-edit__status__problems span { display: inline-flex; align-items: center; gap: 4px; }
+.rmh-edit__status svg { display: inline-block; width: 12px; height: 12px; flex: 0 0 12px; vertical-align: middle; }
+.rmh-edit__status--has-errors   { background: #d13438; }
+.rmh-edit__status--has-warnings { background: #b58a00; }
+
+/* ---- mobile / tablet responsive ---- */
+@media (max-width: 768px) {
+    .rmh-edit { padding: var(--rmh-space-4); }
+    .rmh-edit__card { padding: var(--rmh-space-6); border-radius: var(--rmh-radius-lg); }
+    .rmh-edit__header { gap: var(--rmh-space-4); margin-bottom: var(--rmh-space-6); }
+    .rmh-edit__icon-wrap { width: 36px; height: 36px; flex: 0 0 36px; }
+    .rmh-edit__title { font-size: 16px; }
+    .rmh-edit__subtitle { font-size: var(--rmh-font-xs); }
+    .rmh-edit__select { padding: var(--rmh-space-3) 32px var(--rmh-space-3) var(--rmh-space-4); font-size: var(--rmh-font-sm); }
+    .rmh-edit__monaco { height: 360px; }
+    .rmh-edit__editor-bar { flex-wrap: wrap; }
+    .rmh-edit__editor-bar .rmh-edit__lines { margin-left: 0; flex-basis: 100%; }
+    .rmh-edit__actions { flex-wrap: wrap; gap: var(--rmh-space-2); }
+    .rmh-edit__btn-primary, .rmh-edit__btn-secondary { flex: 1 1 auto; justify-content: center; padding: var(--rmh-space-4) var(--rmh-space-5); }
+    .rmh-edit__btn-ghost { flex: 1 1 100%; justify-content: center; padding: var(--rmh-space-4) var(--rmh-space-5); }
+    .rmh-edit__count { flex-basis: 100%; margin-left: 0; text-align: center; margin-top: var(--rmh-space-2); }
+    .rmh-edit__active-row { font-size: 11px; gap: var(--rmh-space-2); }
+    .rmh-edit__active-sep { display: none; }
+}
+
+@media (max-width: 480px) {
+    .rmh-edit { padding: var(--rmh-space-3); }
+    .rmh-edit__card { padding: var(--rmh-space-5); }
+    .rmh-edit__header { flex-direction: column; align-items: flex-start; }
+    .rmh-edit__monaco { height: 320px; }
+    .rmh-edit__actions { flex-direction: column; align-items: stretch; }
+    .rmh-edit__btn-primary, .rmh-edit__btn-secondary { width: 100%; }
+    .rmh-edit__btn-ghost { width: 100%; }
+}

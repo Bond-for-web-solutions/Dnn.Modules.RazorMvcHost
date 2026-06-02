@@ -1,0 +1,2 @@
+01.00.00
+- Initial release. DNN MVC module that hosts arbitrary Razor (.cshtml) view scripts located under Views/Scripts/. Each module instance picks one script via the Edit screen.
